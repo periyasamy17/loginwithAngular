@@ -1,0 +1,45 @@
+<h3>
+  User Table
+</h3>
+<div>
+  <table border="1">
+    <tr>
+      <th *ngFor="let thHead of userTableHead">{{thHead}}</th>
+    </tr>
+    <tr>
+      <ng-container *ngFor="let users of userList">
+        <td>{{ users.meetingAenga }}</td>
+        <td>{{ users.meetingDuration }}</td>
+        <td>{{ users.userEmail }}</td>
+        <td>{{ users.action }}</td>
+        <br>
+      </ng-container>
+      <br>
+      <button type="button" class="btn btn-primary" (click)="openModal(template)"> Add </button>
+    </tr>
+  </table>
+  <br>
+</div>
+<div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">User Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #form="ngForm" (submit)="registationForm(form.value)">
+      Meeting agenda :
+      <input type="text" [(ngModel)]="userList.meetingAenga" name="meetingAenga">
+      <br> Meeting duration:
+      <input type="text" [(ngModel)]="userList.meetingDuration" name="meetingDuration">
+      <br> Assigned to (email):
+      <input type="text" [(ngModel)]="userList.userEmail" name="userEmail">
+      <br>
+      <button type="submit"> Submit</button>
+    </form>
+  </div>
+</ng-template>
